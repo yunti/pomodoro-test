@@ -28,7 +28,7 @@ let make = () => {
         | Tick =>
           state.isTicking && state.seconds > 0 ? {...state, seconds: state.seconds - 1} : state
         },
-      {isTicking: true, seconds: 30},
+      {isTicking: false, seconds: 30},
     );
 
   React.useEffect0(() => {
