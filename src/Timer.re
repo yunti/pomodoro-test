@@ -31,6 +31,13 @@ module Button = {
   };
 };
 
+let updateTitle: string => unit = [%bs.raw
+  {|
+function updadateTitle(remaining) {
+  document.title = "⏰" + remaining + " ⏰";
+  }|}
+];
+
 [@react.component]
 let make = () => {
   let (state, dispatch) =
@@ -41,7 +48,12 @@ let make = () => {
         | Stop => {...state, isTicking: false}
         | Reset => {...state, seconds: 30}
         | Tick =>
-          state.isTicking && state.seconds > 0 ? {...state, seconds: state.seconds - 1} : state
+          state.isTicking && state.seconds > 0
+            ? {
+              updateTitle(formatTime(state.seconds - 1));
+              {...state, seconds: state.seconds - 1};
+            }
+            : state
         },
       {isTicking: false, seconds: 30},
     );
