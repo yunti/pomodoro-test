@@ -33,7 +33,7 @@ module Button = {
 
 let updateTitle: string => unit = [%bs.raw
   {|
-function updadateTitle(remaining) {
+function updateTitle(remaining) {
   document.title = "⏰" + remaining + " ⏰";
   }|}
 ];
